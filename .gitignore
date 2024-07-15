@@ -1,0 +1,6 @@
+# ignore file
+setting.php
+# igrore file in dir
+dev/js/main.js
+# ignore file with *.extention
+*.mp3
