@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
     <!-- My css -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/my_blog/assets/css/style.css">
 </head>
   <body>
     <!-- Header start-->
@@ -22,7 +22,7 @@
             <div class="row">
                 <div class="col-4">
                     <h1>
-                        <a href="/my_blog/index.html"> My Blog </a></h1> <!-- Clickable logo -->
+                        <a href="/my_blog/index.php"> My Blog </a></h1> <!-- Clickable logo -->
                 </div>
                 <nav class="col-8"> 
                   <!-- Navigation links-->
@@ -55,25 +55,25 @@
     <div id="carouselExampleCaptions" class="carousel slide">
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img src="/my_blog//img/arnel-hasanovic-unsplash.png" class="d-block w-100" alt="...">
+            <img src="/my_blog/assets/img/arnel-hasanovic-unsplash.png" class="d-block w-100" alt="...">
             <div class="carousel-caption-test carousel-caption d-none d-md-block">
               <h5><a href="">First slide label</a></h5>
             </div>
           </div>
           <div class="carousel-item">
-            <img src="/my_blog/img/austin-chan-unsplash.png" class="d-block w-100" alt="...">
+            <img src="/my_blog/assets/img/austin-chan-unsplash.png" class="d-block w-100" alt="...">
             <div class="carousel-caption-test carousel-caption d-none d-md-block">
               <h5><a href=""></a>Second slide label</a></h5>
             </div>
           </div>
           <div class="carousel-item">
-            <img src="/my_blog/img/image2.png" class="d-block w-100" alt="...">
+            <img src="/my_blog/assets/img/image2.png" class="d-block w-100" alt="...">
             <div class="carousel-caption-test carousel-caption d-none d-md-block">
               <h5><a href=""></a>Third slide label</a></h5>
             </div>
           </div>
           <div class="carousel-item">
-            <img src="/my_blog/img/florian-klauer-unsplash.png" class="d-block w-100" alt="...">
+            <img src="/my_blog/assets/img/florian-klauer-unsplash.png" class="d-block w-100" alt="...">
             <div class="carousel-caption-test carousel-caption d-none d-md-block">
               <h5><a href=""></a>Four slide label</a></h5>
             </div>
@@ -100,7 +100,7 @@
 
           <div class="post row">
             <div class="img col-12 col-md-4">
-              <img src="/my_blog/img/arnel-hasanovic-unsplash.png" alt="" class="img-thumbnail">
+              <img src="/my_blog/assets/img/arnel-hasanovic-unsplash.png" alt="" class="img-thumbnail">
             </div>
             <div class="post-text col-12 col-md-8">
               <h3>
@@ -118,7 +118,7 @@
 
           <div class="post row">
             <div class="img col-12 col-md-4">
-              <img src="/my_blog/img/austin-chan-unsplash.png" alt="" class="img-thumbnail">
+              <img src="/my_blog/assets/img/austin-chan-unsplash.png" alt="" class="img-thumbnail">
             </div>
             <div class="post-text col-12 col-md-8">
               <h3>
@@ -136,7 +136,7 @@
           
           <div class="post row">
             <div class="img col-12 col-md-4">
-              <img src="/my_blog/img/austin-chan-unsplash.png" alt="" class="img-thumbnail">
+              <img src="/my_blog/assets/img/austin-chan-unsplash.png" alt="" class="img-thumbnail">
             </div>
             <div class="post-text col-12 col-md-8">
               <h3>
@@ -154,7 +154,7 @@
 
           <div class="post row">
             <div class="img col-12 col-md-4">
-              <img src="/my_blog/img/austin-chan-unsplash.png" alt="" class="img-thumbnail">
+              <img src="/my_blog/assets/img/austin-chan-unsplash.png" alt="" class="img-thumbnail">
             </div>
             <div class="post-text col-12 col-md-8">
               <h3>
@@ -172,7 +172,7 @@
 
           <div class="post row">
             <div class="img col-12 col-md-4">
-              <img src="/my_blog/img/austin-chan-unsplash.png" alt="" class="img-thumbnail">
+              <img src="/my_blog/assets/img/austin-chan-unsplash.png" alt="" class="img-thumbnail">
             </div>
             <div class="post-text col-12 col-md-8">
               <h3>
@@ -194,7 +194,7 @@
         <div class="sidebar col-md-3 col-12">
           <div class="section search">
             <h3>Search</h3>
-            <form action="./index.html" method="post">
+            <form action="./index.php" method="post">
               <input type="text" name="search-term" class="text-input" placeholder="Search..." id="">
             </form>
           </div>

@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
     <!-- My css -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/my_blog/assets/css/style.css">
 </head>
     <body>
 <!-- Header start-->
@@ -48,7 +48,7 @@
 <!-- Header finish -->
 <!-- Registration form start -->
 <div class="container reg_from">
-    <form class="row justify-content-center" method="post" action="./registration.html">
+    <form class="row justify-content-center" method="post" action="/my_blog/registration.php">
         <h2>Registration Form</h2>
         <div class="mb-3 col-12 col-md-4">
             <label for="formGroupExampleInput" class="form-label">Login</label>
@@ -73,7 +73,7 @@
         <div class="w-100"></div>
         <div class="mb-3 col-12 col-md-4">
             <button type="button" class="btn btn-secondary">Register</button>
-            <a href="auth.html">Log In</a>
+            <a href="auth.php">Log In</a>
         </div>
         
     </form>

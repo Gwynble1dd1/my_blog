@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
     <!-- My css -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/my_blog/assets/css/style.css">
 </head>
     <body>
 <!-- Header start-->
@@ -22,7 +22,7 @@
             <div class="row">
                 <div class="col-4">
                     <h1>
-                        <a href="/my_blog/index.html"> My Blog </a></h1> <!-- Clickable logo -->
+                        <a href="/my_blog/index.php"> My Blog </a></h1> <!-- Clickable logo -->
                 </div>
                 <nav class="col-8"> 
                   <!-- Navigation links-->

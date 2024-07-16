@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
     <!-- My css -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/my_blog/assets/css/style.css">
 </head>
   <body>
     <!-- Header start-->
@@ -22,7 +22,7 @@
             <div class="row">
                 <div class="col-4">
                     <h1>
-                        <a href="/my_blog/index.html"> My Blog </a></h1> <!-- Clickable logo -->
+                        <a href="/my_blog/index.php"> My Blog </a></h1> <!-- Clickable logo -->
                 </div>
                 <nav class="col-8"> <!-- Navigation links-->
                     <ul>
@@ -58,7 +58,7 @@
 
         <div class="single_post row">
             <div class="img col-12">
-              <img src="/my_blog/img/austin-chan-unsplash.png" alt="" class="img-thumbnail">
+              <img src="/my_blog/assets/img/austin-chan-unsplash.png" alt="" class="img-thumbnail">
             </div>
 
             <div class="info">
@@ -97,7 +97,7 @@
         <div class="sidebar col-md-3 col-12">
           <div class="section search">
             <h3>Search</h3>
-            <form action="./index.html" method="post">
+            <form action="/my_blog/index.php" method="post">
               <input type="text" name="search-term" class="text-input" placeholder="Search..." id="">
             </form>
           </div>
