@@ -1,3 +1,4 @@
+<?php include("path.php"); ?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -16,36 +17,9 @@
     <link rel="stylesheet" href="/my_blog/assets/css/style.css">
 </head>
     <body>
-<!-- Header start-->
-    <header class="container-fluid">
-        <div class="container">
-            <div class="row">
-                <div class="col-4">
-                    <h1>
-                        <a href="/my_blog/index.html"> My Blog </a></h1> <!-- Clickable logo -->
-                </div>
-                <nav class="col-8"> 
-                  <!-- Navigation links-->
-                    <ul>
-                        <li><a href="#"><i class="fa-solid fa-house"></i>Main</a></li>
-                        <li><a href="#"><i class="fa-solid fa-address-card"></i>About</a></li>
-                        <li><a href="#"><i class="fa-solid fa-server"></i>Services</a></li>
-                        <li>
-                            <a href="#">
-                                <i class="fa-solid fa-user-tie"></i>
-                                Cabinet
-                            </a><!-- Sub menuв -->
-                            <ul>
-                                <li><a href="">Admin Panel</a></li>
-                                <li><a href="">Log Off</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </header>
-<!-- Header finish -->
+<!-- Header include-->
+<?php include("app/include/header.php"); ?>
+
 <!-- Registration form start -->
 <div class="container reg_from">
     <form class="row justify-content-center" method="post" action="/my_blog/registration.php">
@@ -81,68 +55,8 @@
 
 <!-- Registration form finished -->
 
- <!-- Footer start -->
- <div class="footer container-fluid">
-    <div class="footer-content container">
-        <div class="row">
-            <div class="footer-section about col-md-4 col-12">
-              <h3 class="logo-text">My blog</h3>
-              <p>
-                Blog made for practice HTML, CSS and PHP. 
-                I made it for IT-Safe
-              </p>
-          
-              <div class="contact">
-                <span><i class="fa-solid fa-phone"></i>&nbsp; 123-456-789</span>
-                <span><i class="fa-solid fa-envelope"></i>&nbsp; test@mail.com</span>
-              </div>
-              
-              <div class="socials">
-                <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                <a href="#"><i class="fa-brands fa-facebook"></i></a>
-                <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                <a href="#"><i class="fa-brands fa-youtube"></i></a>
-              </div>
-            </div>
-
-          <div class="footer-section links col-md-4 col-12">
-            <h3>Quick Links</h3>
-            <br>
-            <ul>
-              <a href="#">
-                <li>Action</li>
-              </a>
-            </ul>
-            <ul>
-              <a href="#">
-                <li>Command</li>
-              </a>
-            </ul>
-            <ul>
-              <a href="#">
-                <li>Exercise</li>
-              </a>
-            </ul>
-          </div>
-
-          <div class="footer-section contact-form col-md-4 col-12">
-            <h3>Contacts</h3>
-            <br>
-            <form action="index.html" method="post">
-              <input type="email" name="email" class="text-input contact-input" placeholder="You email...">
-              <textarea name="message" class="text-input contact-input" rows="4" placeholder="Your message..."></textarea>
-              <button type="submit" class="btn btn-big contact-btn">
-                <i class="fa-solid fa-envelope"></i>Send
-              </button>
-            </form>
-          </div>
-        </div>
-        <div class="footer-bottom">
-          &copy; my_blog.com | Developed by Gwynble1dd
-        </div>
-      
-    </div>
-  <!-- Footer finish -->
+  <!-- Footer include -->
+  <?php include("app/include/footer.php"); ?>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     </body>
 </html>
