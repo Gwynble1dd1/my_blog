@@ -13,14 +13,31 @@
                         <li><a href="<?php echo BASE_URL . '/' ?>"><i class="fa-solid fa-address-card"></i>About</a></li>
                         <li><a href="#"><i class="fa-solid fa-server"></i>Services</a></li>
                         <li>
-                            <a href="#">
+                            <?php if (isset($_SESSION['id'])): ?>
+                                <a href="#">
                                 <i class="fa-solid fa-user-tie"></i>
-                                Cabinet
-                            </a><!-- Sub menuв -->
+                                <?php echo($_SESSION['login']); ?>
+                                </a>
+                            <!-- Sub menuв -->
                             <ul>
-                                <li><a href="log.php">Admin Panel</a></li>
+                            <?php if ($_SESSION['admin']): ?>
+                                <li><a href="admin/admin.php">Admin Panel</a></li>
+                            <?php endif; ?>
                                 <li><a href="#">Log Off</a></li>
                             </ul>
+
+                            <?php else: ?>
+                                <a href="<?php echo BASE_URL . 'log.php' ?>">
+                                <i class="fa-solid fa-user-tie"></i>
+                                Log In
+                                </a>
+
+                                <ul>
+                                    <li><a href="<?php echo BASE_URL . 'registration.php' ?>">Registration</a></li>
+                                </ul>
+                            <?php endif; ?>
+
+
                         </li>
                     </ul>
                 </nav>

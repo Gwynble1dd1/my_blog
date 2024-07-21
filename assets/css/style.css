@@ -306,3 +306,11 @@ header ul li ul li a {
     margin-left: 145px;
     transition: all .3s;
 }
+
+/* Error message */
+
+div .error p{
+    color: red;
+    font-style: italic;
+    font-size: 0.8rem;
+}

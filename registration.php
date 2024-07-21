@@ -1,4 +1,8 @@
-<?php include("path.php"); ?>
+<?php 
+include "path.php";
+include "app/controllers/users.php"; 
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -22,31 +26,37 @@
 
 <!-- Registration form start -->
 <div class="container reg_from">
-    <form class="row justify-content-center" method="post" action="/my_blog/registration.php">
+    <form class="row justify-content-center" method="post" action="registration.php">
         <h2>Registration Form</h2>
+        <div class="mb-3 col-12 col-md-4 error">
+            <p>
+                <?=$errMSG?>
+            </p>
+        </div>
+        <div class="w-100"></div>
         <div class="mb-3 col-12 col-md-4">
             <label for="formGroupExampleInput" class="form-label">Login</label>
-            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Your login name">
+            <input name="login" value="<?=$login;?>" type="text" class="form-control" id="formGroupExampleInput" placeholder="Your login name">
         </div>
         <div class="w-100"></div>
         <div class="mb-3 col-12 col-md-4">
             <label for="exampleInputEmail1" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <input name="mail" type="email" value="<?=$email?>" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
             <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
         </div>
         <div class="w-100"></div>
         <div class="mb-3 col-12 col-md-4">
             <label for="exampleInputPassword1" class="form-label">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1">
+            <input name="pass-first" type="password" class="form-control" id="exampleInputPassword1">
         </div>
         <div class="w-100"></div>
         <div class="mb-3 col-12 col-md-4">
             <label for="exampleInputPassword1" class="form-label">Repeate password</label>
-            <input type="password" class="form-control" id="exampleInputPassword2">
+            <input name="pass-second" type="password" class="form-control" id="exampleInputPassword2">
         </div>
         <div class="w-100"></div>
         <div class="mb-3 col-12 col-md-4">
-            <button type="button" class="btn btn-secondary">Register</button>
+            <button name="button-reg" type="submit" class="btn btn-secondary">Register</button>
             <a href="auth.php">Log In</a>
         </div>
         

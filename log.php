@@ -1,4 +1,7 @@
-<?php include("path.php"); ?>
+<?php
+include "path.php";
+include "app/controllers/users.php"; 
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -22,21 +25,27 @@
 
 <!-- Registration form start -->
 <div class="container reg_from">
-    <form class="row justify-content-center" method="post" action="./log.html">
+    <form class="row justify-content-center" method="post" action="./log.php">
         <h2>Auth Form</h2>
+        <div class="mb-3 col-12 col-md-4 error">
+            <p>
+                <?=$errMSG?>
+            </p>
+        </div>
+        <div class="w-100"></div>
         <div class="mb-3 col-12 col-md-4">
-            <label for="formGroupExampleInput" class="form-label">Login</label>
-            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Your login name">
+            <label for="formGroupExampleInput" class="form-label">Email</label>
+            <input name="mail" type="email" value="<?=$email?>" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
         </div>
         <div class="w-100"></div>
         <div class="mb-3 col-12 col-md-4">
             <label for="exampleInputPassword1" class="form-label">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1">
+            <input type="password" name="password" class="form-control" id="exampleInputPassword1">
         </div>
         <div class="w-100"></div>
         <div class="mb-3 col-12 col-md-4">
-            <button type="button" class="btn btn-secondary">Registration</button>
-            <a href="auth.html">Registration</a>
+            <button type="submit" name="button-log" class="btn btn-secondary">Log In</button>
+            <a href="auth.php">Registration</a>
         </div>
     </form>
 </div>
