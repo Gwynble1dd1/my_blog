@@ -23,7 +23,7 @@
                             <?php if ($_SESSION['admin']): ?>
                                 <li><a href="admin/admin.php">Admin Panel</a></li>
                             <?php endif; ?>
-                                <li><a href="#">Log Off</a></li>
+                                <li><a href="<?php echo BASE_URL . 'logout.php' ?>">Log Off</a></li>
                             </ul>
 
                             <?php else: ?>

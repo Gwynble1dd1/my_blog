@@ -4,6 +4,18 @@ include "app/database/db.php";
 
 $errMSG = '';
 
+function UserAuth($param){
+    $_SESSION['id'] = $param['id'];
+    $_SESSION['login'] = $param['username'];
+    $_SESSION['admin'] = $param['admin'];
+    if($_SESSION['admin']){
+        header('location: ' . BASE_URL . 'admin/admin.php');
+    }else{
+        header('location: '. BASE_URL);
+    }   
+};
+
+
 // код для регистрации
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['button-reg'])){
     $admin = 0;
@@ -34,18 +46,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['button-reg'])){
         
             $id = insert('users', $post);
             $user = selectOne('users', ['id' => $id]);
-            $_SESSION['id'] = $user['id'];
-            $_SESSION['login'] = $user['username'];
-            $_SESSION['admin'] = $user['admin'];
-            if($_SESSION['admin']){
-                header('location: ' . BASE_URL . 'admin/admin.php');
-            }else{
-                header('location: '. BASE_URL);
-            }   
+            
+            UserAuth($user);
+ 
             // $errMSG = "<div style ='color: green;'> User <strong> $login </strong> has beed created </div>";
         }
-
-        
     }
     }else{
         $login = '';
@@ -60,14 +65,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['button-log'])){
     }else{
         $exist = selectOne('users', ['email'=> $email]);
         if($exist && password_verify($password, $exist['password'])){
-            $_SESSION['id'] = $exist['id'];
-            $_SESSION['login'] = $exist['username'];
-            $_SESSION['admin'] = $exist['admin'];
-            if($_SESSION['admin']){
-                header('location: ' . BASE_URL . 'admin/admin.php');
-            }else{
-                header('location: '. BASE_URL);
-            }   
+            UserAuth($exist);
         }else{
             $errMSG = 'Wrong email or password!';
         }}
