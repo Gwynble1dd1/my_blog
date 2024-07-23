@@ -255,3 +255,9 @@ div .error p{
 .posts .post .id{
     font-weight: bold;
 }
+
+
+
+.add-post form div{
+    margin: 2rem 0;
+}
