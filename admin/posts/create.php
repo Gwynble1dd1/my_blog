@@ -1,6 +1,7 @@
 <?php
-include("../../path.php"); 
-session_start();
+include("../../path.php");
+include("../../app/controllers/posts.php");
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -40,30 +41,43 @@ session_start();
                 <div class="row title-table">
                     <h2>Adding Post</h2>
                 </div>
+                <div class="mb-12 col-12 col-md-12 error">
+                    <p>
+                        <?=$errMSG?>
+                    </p>
+                </div>
 
                 <div class="row add-post">
-                    <form action="create.php" method="post">
+                    <form action="create.php" method="post" enctype="multipart/form-data">
                     <form>
-                        <div class="col">
-                            <input type="text" class="form-control" placeholder="Title" aria-label="Name of post">
+                        <div class="col mb-4">
+                            <input name="title" type="text" class="form-control" placeholder="Title" aria-label="Name of post">
                         </div>
 
                         <div class="col">
                             <label for="editor" class="form-label">Post</label>
-                            <textarea id="editor" class="form-control" rows="12"></textarea>
+                            <textarea name="content" id="editor" class="form-control" rows="12"></textarea>
                         </div>
-                        <div class="input-group col">
-                            <input type="file" class="form-control" id="inputGroupFile02">
+
+                        <div class="input-group col mb-4 mt-4">
+                            <input name="img" type="file" class="form-control" id="inputGroupFile02">
                             <label class="input-group-text" for="inputGroupFile02">Upload</label>
                         </div>
-                        <select class="form-select" aria-label="Default select example">
-                            <option selected>Open this select menu</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+
+                        <select name="category" class="form-select mb-2" aria-label="Default select example">
+                            <option selected value="">Select category of the post</option>
+                            <?php foreach ($categories as $key => $category): ?>
+                            <option value="<?=$category['id'];?>"><?=$category['name'];?></option>
+                            <?php endforeach;?>
                         </select>
-                        <div class="col">
-                            <button class="btn btn-primary" type="submit">Submit post</button>
+                        
+                        <div class="form-check">
+                            <input name="publish" class="form-check-input" type="checkbox" value="1" id="flexCheckChecked" checked>
+                            <label class="form-check-label" for="flexCheckChecked">Publish </label>
+                        </div>
+
+                        <div class="col col-6">
+                            <button name="add-post" class="btn btn-primary" type="submit">Submit post</button>
                         </div>
                         
 
@@ -79,15 +93,6 @@ session_start();
     <?php include("../../app/include/footer.php"); ?>
     <!-- BootSreap CDN -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <!-- CKEditor CDN -->
-    <script type="importmap">
-		{
-			"imports": {
-				"ckeditor5": "https://cdn.ckeditor.com/ckeditor5/42.0.2/ckeditor5.js",
-				"ckeditor5/": "https://cdn.ckeditor.com/ckeditor5/42.0.2/"
-			}
-		}
-		</script>
     <!-- My js script -->
     <script src="../../assets/js/script.js" defer></script>
 </body>

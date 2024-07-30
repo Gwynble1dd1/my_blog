@@ -1,6 +1,6 @@
 <?php
 include("../../path.php"); 
-session_start();
+include("../../app/controllers/posts.php");
 ?>
 <!doctype html>
 <html lang="en">
@@ -38,35 +38,24 @@ session_start();
                 <div class="row title-table">
                     <h2>Enteries Managment</h2>
                     <div class="col-1">ID</div>
-                    <div class="col-4">Post name</div>
-                    <div class="col-3">Author</div>
-                    <div class="col-4">Manage</div>
+                    <div class="col-3">Post name</div>
+                    <div class="col-2">Author</div>
+                    <div class="col-6">Manage</div>
                 </div>
-
+                <?php foreach ($posts_author as $key => $post):?>
                 <div class="row post">
-                    <div class="id col-1">2</div>
-                    <div class="title col-4">Test post</div>
-                    <div class="author col-3">NoName Author</div>
-                    <div class="red col-2"><a href="">Edit</a></div>
+                    <div class="id col-1"><?=$key + 1?></div>
+                    <div class="title col-4"><?=$post['title'];?></div>
+                    <div class="author col-2"><?=$post['username'];?></div>
+                    <div class="red col-1"><a href="">Edit</a></div>
                     <div class="del col-2"><a href="">Delete</a></div>
+                    <?php if($post['status']): ?>
+                        <div class="status col-2"><a href="">Unpublish</a></div>
+                    <?php else:?>
+                        <div class="status col-2"><a href="">Publish</a></div>
+                    <?php endif;?>
                 </div>
-
-
-                <div class="row post">
-                    <div class="id col-1">2</div>
-                    <div class="title col-4">Test post</div>
-                    <div class="author col-3">NoName Author</div>
-                    <div class="red col-2"><a href="">Edit</a></div>
-                    <div class="del col-2"><a href="">Delete</a></div>
-                </div>
-
-                <div class="row post">
-                    <div class="id col-1">2</div>
-                    <div class="title col-4">Test post</div>
-                    <div class="author col-3">NoName Author</div>
-                    <div class="red col-2"><a href="">Edit</a></div>
-                    <div class="del col-2"><a href="">Delete</a></div>
-                </div>
+                <?php endforeach;?>
 
             </div>
 
