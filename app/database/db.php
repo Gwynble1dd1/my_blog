@@ -1,5 +1,5 @@
 <?php
-
+// error_reporting(E_ERROR | E_PARSE); // disable all errors. WARNING!!!
 session_start();
 require('connect.php');
 

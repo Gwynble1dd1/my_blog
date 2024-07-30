@@ -1,6 +1,8 @@
 <?php
 include("path.php");
-include("app/database/db.php");
+include("app/controllers/category.php");
+
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -177,12 +179,9 @@ include("app/database/db.php");
           <div class="section topics">
             <h3>Categories</h3>
             <ul>
-              <li><a href="#">Poems</a></li>
-              <li><a href="#">Fictions</a></li>
-              <li><a href="#">Eat</a></li>
-              <li><a href="#">IT</a></li>
-              <li><a href="#">Pentesting</a></li>
-              <li><a href="#">Snails</a></li>
+            <?php foreach ($categories as $key => $category): ?>
+              <li><a href="#"><?=$category['name'];?></a></li>
+              <?php endforeach; ?>
             </ul>
           </div>
 
