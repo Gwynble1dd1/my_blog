@@ -26,25 +26,13 @@ session_start();
     
     <div class="container">
         <div class="row">
-            <div class="sidebar col-3">
-                <ul>
-                    <li>
-                        <a href="">Records</a>
-                    </li>
-                    <li>
-                        <a href="">Users</a>
-                    </li>
-                    <li>
-                        <a href="">Categories</a>
-                    </li>
-                </ul>
-            </div>
+            <?php include("../../app/include/sidebar-admin.php") ?>
 
             <div class="posts col-9">
                 <div class="button row">
-                    <a href="create.php" class="col-3 btn btn-success" >Add Post</a>
+                    <a href="<?php echo BASE_URL . "admin/posts/create.php";?>" class="col-3 btn btn-success">Make Post</a>
                     <span class="col-1"></span>
-                    <a href="index.php" class="col-3 btn btn-warning">Manage Posts</a>
+                    <a href="<?php echo BASE_URL . "admin/posts/index.php";?>" class="col-3 btn btn-warning">Manage Posts</a>
                 </div>
 
                 <div class="row title-table">

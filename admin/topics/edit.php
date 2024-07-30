@@ -1,6 +1,6 @@
 <?php
-include("../../path.php"); 
-session_start();
+    include("../../path.php"); 
+    include("../../app/controllers/category.php");
 ?>
 <!doctype html>
 <html lang="en">
@@ -30,38 +30,39 @@ session_start();
 
             <div class="posts col-9">
                 <div class="button row">
-                    <a href="create.php" class="col-3 btn btn-success" >Add User</a>
+                    <a href="<?php echo BASE_URL . "admin/topics/create.php";?>" class="col-3 btn btn-success">Add Category</a>
                     <span class="col-1"></span>
-                    <a href="index.php" class="col-3 btn btn-warning">Manage User</a>
+                    <a href="<?php echo BASE_URL . "admin/topics/index.php";?>" class="col-3 btn btn-warning">Edit Category</a>
                 </div>
 
                 <div class="row title-table">
-                    <h2>Users Managment</h2>
-                    <div class="col-1">ID</div>
-                    <div class="col-4">Login</div>
-                    <div class="col-3">Role</div>
-                    <div class="col-4">Manage</div>
+                    <h2>Editing Topic</h2>
                 </div>
 
-                <div class="row post">
-                    <div class="id col-1">2</div>
-                    <div class="title col-4">Alex</div>
-                    <div class="author col-3">Admin</div>
-                    <div class="red col-2"><a href="">Edit</a></div>
-                    <div class="del col-2"><a href="">Delete</a></div>
+                <div class="mb-12 col-12 col-md-12 error">
+                    <p>
+                        <?=$errMSG?>
+                    </p>
                 </div>
 
+                <div class="row add-post">
+                    <form action="edit.php" method="post">
+                        <input type="hidden" name="id" value="<?=$id;?>" >
+                        <div class="col">
+                            <input type="text" name="name" class="form-control" placeholder="Topic's name"value="<?=$name;?>" aria-label="Topic's name">
+                        </div>
+                        <div class="col">
+                            <label for="content" class="form-label">About topic </label>
+                            <textarea name="description" class="form-control" id="content" rows="6"><?=$description;?></textarea>
+                        </div>
+                        <div class="col">
+                            <button class="btn btn-primary" name="category-edit" type="submit">Submit topic</button>
+                        </div>
 
-                <div class="row post">
-                    <div class="id col-1">2</div>
-                    <div class="title col-4">Defila</div>
-                    <div class="author col-3">User</div>
-                    <div class="red col-2"><a href="">Edit</a></div>
-                    <div class="del col-2"><a href="">Delete</a></div>
+                    </form>
                 </div>
 
             </div>
-
         </div>
     </div>
 

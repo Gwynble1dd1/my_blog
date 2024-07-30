@@ -9,6 +9,7 @@ function tt($value){
     echo '<pre>';
     print_r($value);
     echo '<pre>';
+    exit();
 }
 
 // функция проверки на ошибки при подключении к БД
@@ -33,7 +34,7 @@ function selectAll($table, $params = []){
         $i = 0;
         foreach ($params as $key => $value) {
             if (!is_numeric($value)){
-                $value = "'". $value ."'";
+                $value = "'".$value."'";
             }
             if ($i === 0) {
                 $sql = $sql . " WHERE $key = $value";
@@ -113,14 +114,14 @@ function update($table, $id, $params){
     $str = '';
     foreach ($params as $key => $value) {
         if ($i === 0){
-            $str = $str . $key . " = '" . "$value" . "'";
-        }else{
-            $str = $str . ", " .$key . " = '" . "$value" . "'";
+            $str = $str . $key . " = '" . $value . "'";
+        }else {
+            $str = $str .", " . $key . " = '" . $value . "'";
         }
         $i++;
     }
 
-    $sql = "UPDATE $table SET $str WHERE id = $id";
+    $sql = "UPDATE $table SET $str WHERE id =" . $id;
     $query = $pdo->prepare($sql);
     $query->execute();
     dbCheckError($query);
@@ -130,7 +131,7 @@ function update($table, $id, $params){
 
 function delete($table, $id){
     global $pdo;
-    $sql = "DELETE FROM $table  WHERE id = $id";
+    $sql = "DELETE FROM $table  WHERE id =" . $id;
     $query = $pdo->prepare($sql);
     $query->execute();
     dbCheckError($query);

@@ -1,6 +1,5 @@
 <?php 
-include "app/database/db.php";
-
+include "../../app/database/db.php";
 
 $errMSG = '';
 
@@ -56,7 +55,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['button-reg'])){
         $login = '';
         $email = '';
     };
-// код лдля авторизиции
+// код для авторизиции
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['button-log'])){
     $email = trim($_POST["mail"]);
     $password = trim($_POST["password"]);

@@ -16,6 +16,8 @@ session_start();
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/42.0.2/ckeditor5.css">
     <!-- My css -->
     <link rel="stylesheet" href="../../assets/css/admin.css">
 </head>
@@ -26,25 +28,13 @@ session_start();
     
     <div class="container">
         <div class="row">
-            <div class="sidebar col-3">
-                <ul>
-                    <li>
-                        <a href="">Records</a>
-                    </li>
-                    <li>
-                        <a href="">Users</a>
-                    </li>
-                    <li>
-                        <a href="">Categories</a>
-                    </li>
-                </ul>
-            </div>
+        <?php include("../../app/include/sidebar-admin.php") ?>
 
             <div class="posts col-9">
-                <div class="button row">
-                    <a href="create.php" class="col-3 btn btn-success" >Add Post</a>
+            <div class="button row">
+                    <a href="<?php echo BASE_URL . "admin/posts/create.php";?>" class="col-3 btn btn-success">Make Post</a>
                     <span class="col-1"></span>
-                    <a href="index.php" class="col-3 btn btn-warning">Manage Posts</a>
+                    <a href="<?php echo BASE_URL . "admin/posts/index.php";?>" class="col-3 btn btn-warning">Manage Posts</a>
                 </div>
 
                 <div class="row title-table">
@@ -59,8 +49,8 @@ session_start();
                         </div>
 
                         <div class="col">
-                            <label for="content" class="form-label">Post</label>
-                            <textarea class="form-control" id="content" rows="6"></textarea>
+                            <label for="editor" class="form-label">Post</label>
+                            <textarea id="editor" class="form-control" rows="12"></textarea>
                         </div>
                         <div class="input-group col">
                             <input type="file" class="form-control" id="inputGroupFile02">
@@ -75,6 +65,7 @@ session_start();
                         <div class="col">
                             <button class="btn btn-primary" type="submit">Submit post</button>
                         </div>
+                        
 
                     </form>
                     </form>
@@ -86,7 +77,18 @@ session_start();
 
     <!-- Footer include -->
     <?php include("../../app/include/footer.php"); ?>
-
+    <!-- BootSreap CDN -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  </body>
+    <!-- CKEditor CDN -->
+    <script type="importmap">
+		{
+			"imports": {
+				"ckeditor5": "https://cdn.ckeditor.com/ckeditor5/42.0.2/ckeditor5.js",
+				"ckeditor5/": "https://cdn.ckeditor.com/ckeditor5/42.0.2/"
+			}
+		}
+		</script>
+    <!-- My js script -->
+    <script src="../../assets/js/script.js" defer></script>
+</body>
 </html>
