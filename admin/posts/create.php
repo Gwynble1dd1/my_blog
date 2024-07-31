@@ -41,22 +41,23 @@ include("../../app/controllers/posts.php");
                 <div class="row title-table">
                     <h2>Adding Post</h2>
                 </div>
-                <div class="mb-12 col-12 col-md-12 error">
-                    <p>
-                        <?=$errMSG?>
-                    </p>
-                </div>
-
+                
                 <div class="row add-post">
+                    <div class="mb-12 col-12 col-md-12 error">
+                        <p>
+                            <!-- error aray output -->
+                            <?php include("../../app/helps/errorInfo.php") ?>
+                        </p>
+                    </div>
                     <form action="create.php" method="post" enctype="multipart/form-data">
                     <form>
                         <div class="col mb-4">
-                            <input name="title" type="text" class="form-control" placeholder="Title" aria-label="Name of post">
+                            <input value="<?=$title?>" name="title" type="text" class="form-control" placeholder="Title" aria-label="Name of post">
                         </div>
 
                         <div class="col">
                             <label for="editor" class="form-label">Post</label>
-                            <textarea name="content" id="editor" class="form-control" rows="12"></textarea>
+                            <textarea name="content" id="editor" class="form-control" rows="12"><?=$content?></textarea>
                         </div>
 
                         <div class="input-group col mb-4 mt-4">

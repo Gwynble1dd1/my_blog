@@ -5,7 +5,7 @@ if (!$_SESSION){
     header("location: ". BASE_URL ."log.php");
 }
 
-$errMSG = '';
+$errMSG = [];
 $id = '';
 $name = '';
 $description = '';
@@ -28,22 +28,21 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add-post'])){
         $destination = ROOT_PATH . '\assets\img\posts\\'. $imgName;
 
         if(strpos($fileType, 'image') === false) {
-            die('Only image supported');
+            array_push($errMSG, 'Only image supported');
         }
-        
-        if($imgSize > 5242880){
-            die("File size must be less than 5 MB");
+        elseif($imgSize > 5242880){
+             array_push($errMSG, 'File size must be less than 5 MB');
         }
-
 
         $result = move_uploaded_file($imgTmp, $destination);
         if($result){
             $_POST["img"] = $imgName;
         }else{
-            $errMSG = 'Error in uploading image to server';
+             array_push($errMSG, 'Error in uploading image to server');
         }
     }else{
-        $errMSG = 'Error in uploading image to post';
+        $img = '';
+         array_push($errMSG, 'Error in uploading image to post');
     }
 
 
@@ -56,9 +55,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add-post'])){
 
 
     if($title === '' || $content === '' || $category === ''){
-        $errMSG = 'Not all field filled';
+         array_push($errMSG, 'Not all field filled');
     }elseif (mb_strlen($title, 'UTF-8') < 7){
-        $errMSG = 'Title name can not be shorter than 7 symbols';
+        array_push($errMSG, 'Title name can not be shorter than 7 symbols');
     }else{
             $post = [
                 "id_author"=>$_SESSION['id'],

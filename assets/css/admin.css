@@ -260,3 +260,14 @@ div .error p{
 .add-post form div{
     margin: 2rem 0;
 }
+
+
+
+.add-post .error{
+    padding: 1rem 0;
+    color: red;
+    padding-left: 10px;
+}
+.add-post .error ul{
+    list-style-type: none;
+}
