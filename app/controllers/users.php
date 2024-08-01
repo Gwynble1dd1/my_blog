@@ -1,7 +1,7 @@
 <?php 
 include  SITE_ROOT . "/app/database/db.php";
 
-$errMSG = '';
+$errMSG = [];
 
 function UserAuth($param){
     $_SESSION['id'] = $param['id'];
@@ -24,16 +24,16 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['button-reg'])){
     $pass_second = trim($_POST["pass-second"]);
 
     if($login === '' || $email === '' || $pass_first === ''){
-        $errMSG = 'Not all field filled';
+        array_push($errMSG, 'Not all field filled');
     }elseif (mb_strtolower($login, 'UTF-8') < 2){
-        $errMSG = 'Login can not be shorter 2 symbols';
+        array_push($errMSG,'Login can not be shorter 2 symbols');
     }elseif ($pass_first !== $pass_second) {
-        $errMSG = 'Passwords not same';
+        array_push($errMSG,'Passwords not same');
     }
     else{
         $exist = selectOne('users', ['email'=> $email]);
         if(!empty($exist['email']) && $exist['email'] === $email){
-            $errMSG = 'User with this email is exist';
+            array_push($errMSG, 'User with this email is exist');
         }else{
             $pass = password_hash($pass_first, PASSWORD_DEFAULT);
             $post = [
@@ -60,13 +60,74 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['button-log'])){
     $email = trim($_POST["mail"]);
     $password = trim($_POST["password"]);
     if($email === '' || $password === ''){
-        $errMSG = 'Not all field filled';
+        array_push($errMSG, 'Not all field filled');
     }else{
         $exist = selectOne('users', ['email'=> $email]);
         if($exist && password_verify($password, $exist['password'])){
             UserAuth($exist);
         }else{
-            $errMSG = 'Wrong email or password!';
+            array_push($errMSG, 'Wrong email or password!');
+        }}
+
+}else{
+    $email = '';
+}
+
+
+// код для регистрации нового пользователя
+if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create-user'])){
+
+    $admin = 0;
+    $login = trim($_POST["login"]);
+    $email = trim($_POST["mail"]);
+    $pass_first = trim($_POST["pass-first"]);
+    $pass_second = trim($_POST["pass-second"]);
+
+    if($login === '' || $email === '' || $pass_first === ''){
+        array_push($errMSG,  "Not all field filled");
+    }elseif (mb_strtolower($login, 'UTF-8') < 2){
+        array_push($errMSG,  'Login can not be shorter 2 symbols');
+    }elseif ($pass_first !== $pass_second) {
+        array_push($errMSG, 'Passwords not same');
+    }
+    else{
+        $exist = selectOne('users', ['email'=> $email]);
+        if(!empty($exist['email']) && $exist['email'] === $email){
+            array_push($errMSG, 'User with this email is exist');
+        }else{
+            $pass = password_hash($pass_first, PASSWORD_DEFAULT);
+            if(isset($_POST['admin'])) $admin = 1;
+            $user = [
+                "admin"=> $admin,
+                "username"=> $login,
+                "email"=> $email,
+                "password"=> $pass
+            ];
+        
+            $id = insert('users', $user);
+            $user = selectOne('users', ['id' => $id]);
+
+            header('location: ' . BASE_URL . 'admin/users/');
+ 
+            // $errMSG = "<div style ='color: green;'> User <strong> $login </strong> has beed created </div>";
+        }
+    }
+    }else{
+        $login = '';
+        $email = '';
+    };
+// код для авторизиции
+if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['button-log'])){
+    $email = trim($_POST["mail"]);
+    $password = trim($_POST["password"]);
+    if($email === '' || $password === ''){
+        array_push($errMSG, 'Not all field filled');
+    }else{
+        $exist = selectOne('users', ['email'=> $email]);
+        if($exist && password_verify($password, $exist['password'])){
+            UserAuth($exist);
+        }else{
+            array_push($errMSG, 'Wrong email or password!');
         }}
 
 }else{

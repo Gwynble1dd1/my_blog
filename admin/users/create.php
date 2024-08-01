@@ -35,11 +35,19 @@
                     <a href="<?php echo BASE_URL . "admin/users/index.php";?>" class="col-3 btn btn-warning">Manage User</a>
                 </div>
 
+                
+
                 <div class="row title-table">
                     <h2>Creating user</h2>
                 </div>
 
                 <div class="row add-post">
+                <div class="mb-12 col-12 col-md-12 error">
+                        <p>
+                            <!-- error aray output -->
+                            <?php include("../../app/helps/errorInfo.php") ?>
+                        </p>
+                    </div>
 
                     <form action="create.php" method="post">
                     <div class="col">
@@ -62,13 +70,11 @@
                         <input name="pass-second" type="password" class="form-control" id="exampleInputPassword2">
                     </div>
 
-                    <select class="form-select" aria-label="Default select example">
-                            <option value="1">Admin</option>
-                            <option value="2">User</option>
-                        </select>
+                    <input name="admin" class="form-check-input" value="1" type="checkbox" id="flexCheckChecked">
+                    <label class="form-check-label" for="flexCheckChecked">isAdmin</label>
                     
                     <div class="col">
-                        <button class="btn btn-primary" type="submit">Create user</button>
+                        <button name="create-user" class="btn btn-primary" type="submit">Create user</button>
                     </div>
 
                     </form>
