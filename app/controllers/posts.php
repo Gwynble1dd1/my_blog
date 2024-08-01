@@ -41,7 +41,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add-post'])){
              array_push($errMSG, 'Error in uploading image to server');
         }
     }else{
-        $img = '';
          array_push($errMSG, 'Error in uploading image to post');
     }
 
@@ -50,6 +49,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add-post'])){
     $content = trim($_POST["content"]);
     $category = trim($_POST["category"]);
     $img = $_POST["img"];
+  
 
     $is_publish = isset(($_POST["publish"])) ? 1 : 0;
 
@@ -75,54 +75,101 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add-post'])){
             // $errMSG = "<div style ='color: green;'> User <strong> $login </strong> has beed created </div>";
         }
     }else{
+        $id = '';
         $title = '';
         $content = '';
+        $is_publish = '';
+        $category = '';
     };
 
 
-// editing category
+// editing post
 if($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])){
-    $id = $_GET['id'];
-    $category = selectOne('category', ['id'=> $id]);
-    $id = $category['id'];
-    $name = $category['name'];
-    $description = $category['description'];
+    $post = selectOne('posts', ['id'=> $_GET['id']]);
+    $id = $post['id'];
+    $title = $post['title'];
+    $content = $post['content'];
+    $category = $post['category_id'];
+    $is_publish = $post['status'];
 };
 
-// // updating category
-// if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['category-edit'])){
-//     $name = trim($_POST["name"]);
-//     $description = trim($_POST["description"]);
-//     $id = $_POST["id"];
-//     if($name === '' || $description === ''){
-//         $errMSG = 'Not all field filled';
-//     }elseif (mb_strlen($name, 'UTF-8') < 2){
-//         $errMSG = 'Category name can not be shorter than 2 symbols';
-//     }else{
-//         $exist = selectOne('category', ['name'=> $name]);
-//         if(!empty($exist['name']) && $exist['name'] === $name){
-//             $errMSG = 'Same category is exist';
-//         }else{
-//             $category = [
-//                 "name"=> $name,
-//                 "description"=> $description
-//             ];
-//             $id = $_POST["id"];
-//             $category_id = update('category', $id, $category);
-            
-//             header('location: ' . BASE_URL .'admin/topics/index.php');
- 
-//             // $errMSG = "<div style ='color: green;'> User <strong> $login </strong> has beed created </div>";
-//         }
-//     }};
+// updating post
+if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit-post'])){
 
-// // Deleting category
-// if($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['delete_id'])){
-//     $id = $_GET['delete_id'];
+    $id = $_POST['id'];
+    $title = $_POST['title'];
+    $img = $_POST['img'];
+    $content = $_POST['content'];
+    $category = $_POST['category'];
+    $is_publish = isset(($_POST["publish"])) ? 1 : 0;
 
-//     delete('category', $id);
+    if(!empty($_FILES['img']['name'])){
+        $imgName = time()."_".$_FILES['img']['name'];
+        $fileType = $_FILES['img']['type'];
+        $imgTmp = $_FILES['img']['tmp_name'];
+        $imgSize = $_FILES['img']['size'];
 
-//     header('location: ' . BASE_URL .'admin/topics/index.php');
-// };
+
+        $destination = ROOT_PATH . '\assets\img\posts\\'. $imgName;
+
+        if(strpos($fileType, 'image') === false) {
+            array_push($errMSG, 'Only image supported');
+        }
+        elseif($imgSize > 5242880){
+             array_push($errMSG, 'File size must be less than 5 MB');
+        }
+
+        $result = move_uploaded_file($imgTmp, $destination);
+        if($result){
+            $_POST["img"] = $imgName;
+        }else{
+             array_push($errMSG, 'Error in uploading image to server');
+        }
+    }else{
+         array_push($errMSG, 'Error in uploading image to post');
+    }
+
+    if($title === '' || $content === '' || $category === ''){
+         array_push($errMSG, 'Not all field filled');
+    }elseif (mb_strlen($title, 'UTF-8') < 7){
+        array_push($errMSG, 'Title name can not be shorter than 7 symbols');
+    }else{
+            $post = [
+                "id_author"=>$_SESSION['id'],
+                "title"=> $title,
+                "content"=> $content,
+                "img"=> $_POST['img'],
+                "status"=>$is_publish,
+                "category_id"=> $category
+            ];
+
+            $post = update('posts', $id, $post);
+            header('location: ' . BASE_URL .'admin/posts/index.php');
+        }
+    }else{ 
+        // $title = $_POST["title"];
+        // $content = $_POST["content"];
+        // $is_publish = isset($_POST['publish']) ? 1 : 0;
+        // $category = $_POST["category_id"];
+    };
+;
+
+// Deleting post
+if($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['delete_id'])){
+    $id = $_GET['delete_id'];
+    delete('posts', $id);
+    header('location: ' . BASE_URL .'admin/posts/index.php');
+};
+
+// publish or unpublish
+if($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['pub_id'])){
+    $id = $_GET['pub_id'];
+    $is_publish = $_GET['publish'];
+    
+    $post_id = update('posts', $id, ['status'=> $is_publish]);
+    header('location: ' . BASE_URL .'admin/posts/index.php');
+    exit();
+};
+
 
 ?>

@@ -47,12 +47,12 @@ include("../../app/controllers/posts.php");
                     <div class="id col-1"><?=$key + 1?></div>
                     <div class="title col-4"><?=$post['title'];?></div>
                     <div class="author col-2"><?=$post['username'];?></div>
-                    <div class="red col-1"><a href="">Edit</a></div>
-                    <div class="del col-2"><a href="">Delete</a></div>
+                    <div class="red col-1"><a href="edit.php?id=<?=$post['id'];?>">Edit</a></div>
+                    <div class="del col-2"><a href="edit.php?delete_id=<?=$post['id'];?>">Delete</a></div> 
                     <?php if($post['status']): ?>
-                        <div class="status col-2"><a href="">Unpublish</a></div>
+                        <div class="status col-2"><a href="edit.php?publish=0&pub_id=<?=$post['id'];?>">Unpublish</a></div>
                     <?php else:?>
-                        <div class="status col-2"><a href="">Publish</a></div>
+                        <div class="status col-2"><a href="edit.php?publish=1&pub_id=<?=$post['id'];?>">Publish</a></div>
                     <?php endif;?>
                 </div>
                 <?php endforeach;?>
