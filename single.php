@@ -1,4 +1,9 @@
-<?php include("path.php"); ?>
+<?php 
+include("path.php"); 
+include SITE_ROOT . "/app/database/db.php";
+$post= selectOne('posts',['id'=> $_GET['post']]);
+$user =selectOne('users',['id'=> $post['id_author']]);
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -26,42 +31,22 @@
         <!-- Maint Content -->
         <div class="main-content col-md-9 col-12">
           <h2>
-            Post title with 17 words Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-            Nam repellat, nesciunt consequatur quaerat inventore similique?
-        </h2>
+            <?=$post['title'];?>
+          </h2>
 
         <div class="single_post row">
             <div class="img col-12">
-              <img src="/my_blog/assets/img/austin-chan-unsplash.png" alt="" class="img-thumbnail">
+              <img src="<?=BASE_URL . 'assets/img/posts/'. $post['img']?>" alt="<?=$post['title']?>" class="img-thumbnail">
             </div>
 
             <div class="info">
-                <i class="far fa-user"> Name </i>
-                <i class="far fa-calendar"> June 12, 2045</i>
+                <i class="far fa-user"> <?=$user['username'];?> </i>
+                <i class="far fa-calendar"> <?=$post['created_date'];?></i>
             </div>
 
             <div class="single_post-text col-12">
               <p>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusamus corrupti error,
-                sequi distinctio ex magni <a href="">tenetur</a> tenetur numquam omnis doloribus voluptatum eveniet facere sunt rerum deleniti, 
-                dignissimos delectus non dolorum cumque fugit odit iste itaque quisquam pariatur? Facilis quis est maxime aspernatur magnam blanditiis
-                quos expedita vero iste sed, obcaecati cumque sint aperiam soluta hic cupiditate, nulla corrupti error iure tenetur libero.
-                Praesentium, cumque rem debitis voluptatum illum tempora ipsa distinctio fugiat quae necessitatibus ipsum unde ea nihil commodi,
-                aperiam aliquid, sed iure. Dicta esse, voluptas ex in fugiat vero. Numquam molestiae placeat vitae ad fugiat necessitatibus 
-                veniam dolor commodi ullam.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Aspernatur voluptas sed impedit dolorem deserunt vitae rem accusantium officiis,
-                pariatur natus nisi labore ipsum rerum! Recusandae esse aliquam enim voluptatibus asperiores, reprehenderit 
-                sint. Quo animi blanditiis voluptatem eligendi dolores excepturi velit nam veritatis, consequuntur libero accusantium 
-                incidunt dolore ullam officia error. Explicabo assumenda ut blanditiis culpa accusantium recusandae quos odio commodi voluptatibus 
-                tempora sequi obcaecati saepe debitis hic animi, ea ullam perspiciatis eos! Quidem, voluptates quis. Assumenda sunt fugiat dolore, quod 
-                iste accusantium neque ut laudantium inventore mollitia ullam. Cupiditate perspiciatis labore placeat suscipit impedit, rem autem. Quibusdam
-                possimus maxime ipsa quis magni atque et. Porro fuga a quos inventore, fugit voluptates, autem assumenda eligendi dolorem impedit numquam nobis cupiditate in nemo
-                nihil tempore debitis, deserunt alias pariatur. Eius excepturi temporibus quas, reiciendis facilis, quos eum ut rerum numquam tempora praesentium? Qui quod cupiditate
-                ratione praesentium corrupti commodi maxime minus modi inventore veniam mollitia tenetur exercitationem nesciunt pariatur nam placeat, sed voluptatem quos enim 
-                ab aliquid quibusdam, porro perspiciatis cumque. Delectus ipsum, consectetur, tempore repellendus neque praesentium a quia ullam vero officia voluptatum odio 
-                voluptate iste nobis atque. 
-                Voluptatibus sequi fugit quo obcaecati ex necessitatibus quod fuga, sit doloremque facere! Temporibus.
+              <?=$post['content'];?>
               </p>
             </div>
           </div>

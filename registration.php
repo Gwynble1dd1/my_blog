@@ -30,7 +30,7 @@ include "app/controllers/users.php";
         <h2>Registration Form</h2>
         <div class="mb-3 col-12 col-md-4 error">
             <p>
-                <?=$errMSG?>
+                <?php include("app/helps/errorInfo.php") ?>
             </p>
         </div>
         <div class="w-100"></div>

@@ -4,3 +4,4 @@ setting.php
 dev/js/main.js
 # ignore file with *.extention
 *.mp3
+/assets/img/posts

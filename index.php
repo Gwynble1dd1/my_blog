@@ -1,8 +1,11 @@
 <?php
-include("path.php");
-include("app/controllers/category.php");
-
-
+  include("path.php");
+  include("app/controllers/category.php");
+  $posts = selectAllFromPostsWithUsersOnIndex('posts', 'users');
+  $top_posts = selectTopPosts('posts');
+  // tt($top_posts);
+  
+  // tt($posts);
 ?>
 <!doctype html>
 <html lang="en">
@@ -30,32 +33,22 @@ include("app/controllers/category.php");
           <h2 class="slider-title">Top favorite posts</h2>
       </div>
       <div id="carouselExampleCaptions" class="carousel slide">
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img src="/my_blog/assets/img/arnel-hasanovic-unsplash.png" class="d-block w-100" alt="...">
-              <div class="carousel-caption-test carousel-caption d-none d-md-block">
-                <h5><a href="">First slide label</a></h5>
-              </div>
+            
+            <div class="carousel-inner">
+            <?php foreach ($top_posts as $key => $top_post): ?>
+              <?php if($key == 0): ?>
+                <div class="carousel-item active">
+                  <?php else:?>
+                <div class="carousel-item">
+                  <?php endif;?>
+                  <img src="<?=BASE_URL . 'assets/img/posts/'. $top_post['img']?>" class="d-block w-100" alt="<?=$top_post['title']?>">
+                <div class="carousel-caption-test carousel-caption d-none d-md-block">
+                  <h5><a href="single.php?post=<?=$top_post['id']?>"><?=mb_substr($top_post['title'],0, 120, 'UTF-8') . '...'?></a></h5>
+                </div>
+              <?php endforeach;?>
             </div>
-            <div class="carousel-item">
-              <img src="/my_blog/assets/img/austin-chan-unsplash.png" class="d-block w-100" alt="...">
-              <div class="carousel-caption-test carousel-caption d-none d-md-block">
-                <h5><a href=""></a>Second slide label</a></h5>
-              </div>
-            </div>
-            <div class="carousel-item">
-              <img src="/my_blog/assets/img/image2.png" class="d-block w-100" alt="...">
-              <div class="carousel-caption-test carousel-caption d-none d-md-block">
-                <h5><a href=""></a>Third slide label</a></h5>
-              </div>
-            </div>
-            <div class="carousel-item">
-              <img src="/my_blog/assets/img/florian-klauer-unsplash.png" class="d-block w-100" alt="...">
-              <div class="carousel-caption-test carousel-caption d-none d-md-block">
-                <h5><a href=""></a>Four slide label</a></h5>
-              </div>
-            </div>
-          </div>
+            
+
           <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
@@ -74,98 +67,23 @@ include("app/controllers/category.php");
         <!-- Maint Content -->
         <div class="main-content col-md-9 col-12">
           <h2>Last publication</h2>
-
+          <?php foreach ($posts as $post): ?>
           <div class="post row">
             <div class="img col-12 col-md-4">
-              <img src="/my_blog/assets/img/arnel-hasanovic-unsplash.png" alt="" class="img-thumbnail">
+              <img src="<?=BASE_URL . 'assets/img/posts/'. $post['img']?>" alt="<?=$post['title']?>" class="img-thumbnail">
             </div>
             <div class="post-text col-12 col-md-8">
               <h3>
-                <a href="">Lorem ipsum.</a>
+                <a href="single.php?post=<?=$post['id']?>"><?=mb_substr($post['title'],0, 120, 'UTF-8') . '...'?></a>
               </h3>
-              <i class="far fa-user"> Name </i>
-              <i class="far fa-calendar"> June 12, 2045</i>
+              <i class="far fa-user"><?=$post['username']?></i>
+              <i class="far fa-calendar"><?=$post['created_date']?></i>
               <p class="preview-text">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
-                Sit iste cumque fugit praesentium mollitia, dolore provident quos itaque facilis nostrum sint consequuntur rerum, 
-                distinctio eaque incidunt impedit porro minus illum!
+                <?=substr($post['title'],0, 150) . '...'?>
               </p>
             </div>
           </div>
-
-          <div class="post row">
-            <div class="img col-12 col-md-4">
-              <img src="/my_blog/assets/img/austin-chan-unsplash.png" alt="" class="img-thumbnail">
-            </div>
-            <div class="post-text col-12 col-md-8">
-              <h3>
-                <a href="">Lorem ipsum.</a>
-              </h3>
-              <i class="far fa-user"> Name </i>
-              <i class="far fa-calendar"> June 12, 2045</i>
-              <p class="preview-text">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
-                Sit iste cumque fugit praesentium mollitia, dolore provident quos itaque facilis nostrum sint consequuntur rerum, 
-                distinctio eaque incidunt impedit porro minus illum!
-              </p>
-            </div>
-          </div>
-          
-          <div class="post row">
-            <div class="img col-12 col-md-4">
-              <img src="/my_blog/assets/img/austin-chan-unsplash.png" alt="" class="img-thumbnail">
-            </div>
-            <div class="post-text col-12 col-md-8">
-              <h3>
-                <a href="">Lorem ipsum.</a>
-              </h3>
-              <i class="far fa-user"> Name </i>
-              <i class="far fa-calendar"> June 12, 2045</i>
-              <p class="preview-text">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
-                Sit iste cumque fugit praesentium mollitia, dolore provident quos itaque facilis nostrum sint consequuntur rerum, 
-                distinctio eaque incidunt impedit porro minus illum!
-              </p>
-            </div>
-          </div>
-
-          <div class="post row">
-            <div class="img col-12 col-md-4">
-              <img src="/my_blog/assets/img/austin-chan-unsplash.png" alt="" class="img-thumbnail">
-            </div>
-            <div class="post-text col-12 col-md-8">
-              <h3>
-                <a href="">Lorem ipsum.</a>
-              </h3>
-              <i class="far fa-user"> Name </i>
-              <i class="far fa-calendar"> June 12, 2045</i>
-              <p class="preview-text">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
-                Sit iste cumque fugit praesentium mollitia, dolore provident quos itaque facilis nostrum sint consequuntur rerum, 
-                distinctio eaque incidunt impedit porro minus illum!
-              </p>
-            </div>
-          </div>
-
-          <div class="post row">
-            <div class="img col-12 col-md-4">
-              <img src="/my_blog/assets/img/austin-chan-unsplash.png" alt="" class="img-thumbnail">
-            </div>
-            <div class="post-text col-12 col-md-8">
-              <h3>
-                <a href="">Lorem ipsum.</a>
-              </h3>
-              <i class="far fa-user"> Name </i>
-              <i class="far fa-calendar"> June 12, 2045</i>
-              <p class="preview-text">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
-                Sit iste cumque fugit praesentium mollitia, dolore provident quos itaque facilis nostrum sint consequuntur rerum, 
-                distinctio eaque incidunt impedit porro minus illum!
-              </p>
-            </div>
-          </div>
-
-
+          <?php endforeach;?>
         </div>
         <!-- Sidebar Content -->
         <div class="sidebar col-md-3 col-12">

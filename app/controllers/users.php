@@ -14,6 +14,9 @@ function UserAuth($param){
     }   
 };
 
+$users = selectAll('users');
+
+
 
 // код для регистрации
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['button-reg'])){
@@ -36,14 +39,14 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['button-reg'])){
             array_push($errMSG, 'User with this email is exist');
         }else{
             $pass = password_hash($pass_first, PASSWORD_DEFAULT);
-            $post = [
+            $user = [
                 "admin"=> $admin,
                 "username"=> $login,
                 "email"=> $email,
                 "password"=> $pass
             ];
         
-            $id = insert('users', $post);
+            $id = insert('users', $user);
             $user = selectOne('users', ['id' => $id]);
             
             UserAuth($user);
@@ -73,8 +76,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['button-log'])){
     $email = '';
 }
 
-
-// код для регистрации нового пользователя
+//--------------------------------------------------------------------------------------------------------------------------------------------
+// код для регистрации нового пользователя ADMIN
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create-user'])){
 
     $admin = 0;
@@ -106,8 +109,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create-user'])){
         
             $id = insert('users', $user);
             $user = selectOne('users', ['id' => $id]);
-
-            header('location: ' . BASE_URL . 'admin/users/');
  
             // $errMSG = "<div style ='color: green;'> User <strong> $login </strong> has beed created </div>";
         }
@@ -116,22 +117,63 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create-user'])){
         $login = '';
         $email = '';
     };
-// код для авторизиции
-if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['button-log'])){
-    $email = trim($_POST["mail"]);
-    $password = trim($_POST["password"]);
-    if($email === '' || $password === ''){
-        array_push($errMSG, 'Not all field filled');
-    }else{
-        $exist = selectOne('users', ['email'=> $email]);
-        if($exist && password_verify($password, $exist['password'])){
-            UserAuth($exist);
-        }else{
-            array_push($errMSG, 'Wrong email or password!');
-        }}
 
-}else{
-    $email = '';
-}
+
+// Deleting user
+if($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['delete_id'])){
+    $id = $_GET['delete_id'];
+    delete('users', $id);
+    header('location: ' . BASE_URL .'admin/users/index.php');
+};
+
+
+// editing user in admin
+if($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['edit_id'])){
+    $user = selectOne('users', ['id'=> $_GET['edit_id']]);
+
+    $id = $user['id'];
+    $login = $user['username'];
+    $email = $user['email'];
+    $admin = $user['admin'];
+};
+
+
+
+if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update-user'])){
+
+    $id = $_POST['id'];
+    $login = $_POST['login'];
+    $email = $_POST['mail'];
+    $passF = $_POST['pass-first'];
+    $passS = $_POST['pass-second'];
+    $admin = isset(($_POST["admin"])) ? 1 : 0;
+
+    if($login === ''){
+         array_push($errMSG, 'Not all field filled ');
+    }elseif (mb_strlen($login, 'UTF-8') < 2){
+        array_push($errMSG, 'Login can not be shorter than 7 symbols');
+    }elseif ($passF !== $passS) {
+        array_push($errMSG, 'Passwords not same');
+    }else{
+        $pass = password_hash($passF, PASSWORD_DEFAULT);
+        if(isset($_POST['admin'])) $admin = 1;
+        $user = [
+            "admin"=> $admin,
+            "username"=> $login,
+            // "email"=> $email,
+            "password"=> $pass
+        ];
+    
+        $user = update('users', $id, $user);
+        header('location: ' . BASE_URL .'admin/users/index.php');
+
+        }
+    }else{
+        // $id =  $user['id'];
+        // $admin =  $user['admin'];
+        // $username = $user['username'];
+        // $email = $user['email'];
+    };
+;
 
 ?>

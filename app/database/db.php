@@ -150,4 +150,27 @@ function selectAllFromPostsWithUsers($table1, $table2){
     return $query->fetchAll();
 }
 
+
+// Choose all posts and authors to main panel
+function selectAllFromPostsWithUsersOnIndex($table1, $table2){
+    global $pdo;    
+    $sql = "SELECT p.*, u.username FROM $table1 AS p JOIN $table2 AS u ON p.id_author = u.id WHERE p.status=1";
+
+    $query = $pdo->prepare($sql);
+    $query->execute();
+    dbCheckError($query);
+    return $query->fetchAll();
+}
+
+// Choose top posts
+function selectTopPosts($table1){
+    global $pdo;    
+    $sql = "SELECT * FROM $table1 WHERE category_id = 19";
+
+    $query = $pdo->prepare($sql);
+    $query->execute();
+    dbCheckError($query);
+    return $query->fetchAll();
+}
+
 ?>

@@ -1,6 +1,6 @@
 <?php
 include("../../path.php"); 
-session_start();
+include "../../app/controllers/users.php";
 ?>
 <!doctype html>
 <html lang="en">
@@ -38,27 +38,26 @@ session_start();
                 <div class="row title-table">
                     <h2>Users Managment</h2>
                     <div class="col-1">ID</div>
-                    <div class="col-4">Login</div>
-                    <div class="col-3">Role</div>
+                    <div class="col-2">Login</div>
+                    <div class="col-3">Mail</div>
+                    <div class="col-2">Role</div>
                     <div class="col-4">Manage</div>
                 </div>
-
+                <?php foreach ($users as $key => $user): ?>
                 <div class="row post">
-                    <div class="id col-1">2</div>
-                    <div class="title col-4">Alex</div>
-                    <div class="author col-3">Admin</div>
-                    <div class="red col-2"><a href="">Edit</a></div>
-                    <div class="del col-2"><a href="">Delete</a></div>
-                </div>
+                    <div class="id col-1"><?=$user['id']?></div>
+                    <div class="title col-2"><?=$user['username']?></div>
+                    <div class="mail col-3"><?=$user['email']?></div>
+                    <?php if ($user['admin']):?>
+                        <div class="author col-2">Admin</div>
+                    <?php else:?>
+                        <div class="author col-2">User</div>
+                    <?php endif;?>
 
-
-                <div class="row post">
-                    <div class="id col-1">2</div>
-                    <div class="title col-4">Defila</div>
-                    <div class="author col-3">User</div>
-                    <div class="red col-2"><a href="">Edit</a></div>
-                    <div class="del col-2"><a href="">Delete</a></div>
+                    <div class="red col-2"><a href="edit.php?edit_id=<?=$user['id'];?>">Edit</a></div>
+                    <div class="del col-2"><a href="edit.php?delete_id=<?=$user['id'];?>">Delete</a></div>
                 </div>
+                <?php endforeach;?>
 
             </div>
 
